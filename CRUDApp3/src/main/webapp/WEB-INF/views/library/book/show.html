@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:selectth="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Show info about book</title>
+</head>
+<body>
+<p th:text="${book.getName()}">book</p>
+<p th:text="${'book id: ' + book.getId()}">VALUE</p>
+<p th:text="${'author: ' + book.getAuthor()}">VALUE</p>
+<p th:text="${book.getYear()}">VALUE</p>
+<div th:if="${owner}">
+<p>Owner now is:</p>
+
+    <p th:text="${owner.getName()}"> Value</p>
+    <form th:method="PATCH" th:action="@{/library/book/{id}/release(id=${book.getId()})}">
+        <input type="submit" value="Return book"/>
+    </form>
+</div>
+
+<hr/>
+<div th:if="${readers}">
+    <p>DO you select this book?</p>
+    <form th:method="PATCH" th:action="@{/library/book/{id}/assign(id=${book.getId()})}">
+        <p>dddd</p>
+        <label for="reader" >Select reader</label>
+        <select id="reader" th:field="*{reader_id}" th:object="${reader}">
+            <option th:each="reader:${readers}" th:value="${reader.getReader_id}" th:text="${reader.getName}">Reader1</option>
+<!--            <option value="orange" text="orange">Zrange</option>-->
+        </select>
+<!--        <select th:object="${reader}" th:field="*{reader_id}" id="reader">-->
+
+
+        <input type="submit" value="Selected admin"/>
+    </form>
+</div>
+
+
+<a th:href="@{/library/book/{id}/edit(id=${book.getId()})}">Edit</a>
+
+<form th:method="Delete" th:action="@{/library/book/{id}(id=${book.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>

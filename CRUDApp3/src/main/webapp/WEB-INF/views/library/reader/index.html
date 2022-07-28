@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index reader</title>
+</head>
+<body>
+<div th:each="reader : ${readers}">
+    <a th:href="@{/library/reader/{id}(id=${reader.getReader_id()})}"
+       th:text="${reader.getName +',' + reader.getYear()}">reader</a>
+</div>
+<br/>
+<hr/>
+<a href="/library/reader/new">Create reader</a>
+</body>
+</html>

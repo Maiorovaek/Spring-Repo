@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+<p th:text="${reader.getName()}">person</p>
+<p th:text="${'reader id=' + reader.getReader_id()}">VALUE</p>
+<p th:text="${reader.getYear()}">VALUE</p>
+<div th:if="${books.isEmpty()}">
+    <hr/>
+    <p>Reader hasn't book.</p>
+</div>
+<!--<div th:if="${books!= null}">-->
+
+<div th:if="${!books.isEmpty()}">
+    <hr/>
+    <b>Books:</b>
+    <br/>
+    <div th:each="book : ${books}">
+        <p th:text="${book.getName +',' + book.getAuthor() +',' + book.getYear()}">book</p>
+<!--        <form th:method="PATCH" th:action="@{/library/reader/{id}(id=${reader.getReader_id()})}"-->
+<!--              th:object="${reader}">-->
+<!--            <input type="submit" value="Return this book!"/>-->
+<!--        </form>-->
+    </div>
+
+    <hr/>
+</div>
+<br/>
+<br/>
+
+
+<a th:href="@{/library/reader/{id}/edit(id=${reader.getReader_id()})}">Edit</a>
+
+<form th:method="Delete" th:action="@{/library/reader/{id}(id=${reader.getReader_id()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>

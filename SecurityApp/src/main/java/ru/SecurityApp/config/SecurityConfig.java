@@ -3,6 +3,7 @@ package ru.SecurityApp.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,6 +15,7 @@ import ru.SecurityApp.services.PersonDetailsService;
 //import ru.SecurityApp.security.AuthProviderImpl;
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private PersonDetailsService personDetailsService;
 
@@ -34,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // конфигурируем авторизацию (двавть или не давать доступ к страницам)
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
+            //    .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/auth/login","/auth/registration", "error").permitAll()
 //                .anyRequest().authenticated()
              //   .anyRequest().hasAnyAuthority("","") //list of user actions

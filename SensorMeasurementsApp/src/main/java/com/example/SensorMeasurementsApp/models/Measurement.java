@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,11 +21,17 @@ public class Measurement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "temperature")
+    @NotNull
+    @Min(-100)
+    @Max(100)
     private Double temperature;
     @Column(name = "rainy")
+    @NotNull
     private Boolean rainy;
     @Column(name = "measurement_date_time")
+    @NotNull
     private LocalDateTime measurementDateTime;
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "sensor_name", referencedColumnName = "name")
     private Sensor sensor;
